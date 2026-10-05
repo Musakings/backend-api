@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use App\Models\Product;
 use App\Services\ProductService;
 
@@ -43,6 +44,13 @@ class ProductController extends Controller
                 'data' => $product
             ], 201);
 
+        } catch (ValidationException $e) {
+
+            return response()->json([
+                'message' => 'Data yang dikirim tidak valid',
+                'errors' => $e->errors()
+            ], 422);
+
         } catch (\Exception $e) {
 
             Log::error('Terjadi Kesalahan', [
@@ -78,6 +86,13 @@ class ProductController extends Controller
                 'message' => 'Produk berhasil diperbarui',
                 'data' => $updatedProduct
             ]);
+
+        } catch (ValidationException $e) {
+
+            return response()->json([
+                'message' => 'Data yang dikirim tidak valid',
+                'errors' => $e->errors()
+            ], 422);
 
         } catch (\Exception $e) {
 
