@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Database\Seeders;
@@ -36,5 +37,10 @@ class DatabaseSeeder extends Seeder
                 'role' => 'mahasiswa',
             ]
         );
+
+        // Menambahkan data produk
+        $this->call([
+            ProductSeeder::class,
+        ]);
     }
 }
