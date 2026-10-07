@@ -1,46 +1,46 @@
-
 <?php
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-
-class DatabaseSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'musa@example.com'],
+        $products = [
             [
-                'name' => 'Musa',
-                'password' => Hash::make('password123'),
-                'role' => 'admin',
-            ]
-        );
-
-        User::updateOrCreate(
-            ['email' => 'iman@example.com'],
+                'name' => 'Laptop',
+                'price' => 5000000,
+                'stock' => 10,
+            ],
             [
-                'name' => 'Iman',
-                'password' => Hash::make('password123'),
-                'role' => 'dosen',
-            ]
-        );
-
-        User::updateOrCreate(
-            ['email' => 'kartika@example.com'],
+                'name' => 'Keyboard',
+                'price' => 300000,
+                'stock' => 25,
+            ],
             [
-                'name' => 'Kartika',
-                'password' => Hash::make('password123'),
-                'role' => 'mahasiswa',
-            ]
-        );
+                'name' => 'Mouse',
+                'price' => 150000,
+                'stock' => 30,
+            ],
+            [
+                'name' => 'Monitor',
+                'price' => 2000000,
+                'stock' => 8,
+            ],
+            [
+                'name' => 'Headset',
+                'price' => 250000,
+                'stock' => 15,
+            ],
+        ];
 
-        // Menambahkan data produk
-        $this->call([
-            ProductSeeder::class,
-        ]);
+        foreach ($products as $product) {
+            Product::updateOrCreate(
+                ['name' => $product['name']],
+                $product
+            );
+        }
     }
 }
